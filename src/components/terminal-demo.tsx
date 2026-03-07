@@ -40,7 +40,7 @@ export const TerminalDemo = () => {
       <div className="p-6 font-mono text-[13px] md:text-sm leading-relaxed overflow-x-auto text-neutral-300 bg-[#050505]/80">
         <div className="flex items-center text-orange-500 mb-6">
           <span className="text-white/40 mr-3">admin@pydoctor:~$</span> 
-          <TypingText text="pydoctor --autonomous-scan" delay={0.2} speed={40} />
+          <TypingText text="pyydoctor diagnose --verbose" delay={0.2} speed={40} />
         </div>
         
         <FadeIn delay={1.4}>

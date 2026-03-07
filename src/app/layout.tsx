@@ -17,6 +17,9 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   title: 'PyDoctor - The Autonomous Diagnostic Engine',
   description: 'Enterprise-grade environment analysis, security auditing, and health orchestration for Python ecosystems.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

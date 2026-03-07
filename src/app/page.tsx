@@ -5,6 +5,7 @@ import { CommandPill } from "@/components/command-pill";
 import { Github, ArrowRight, ShieldCheck, Zap, Lock, Cpu } from "lucide-react";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
+import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
@@ -123,7 +124,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-4 bg-orange-500 text-black text-sm font-bold rounded-full hover:bg-orange-400 transition-all shadow-[0_0_30px_rgba(249,115,22,0.4)]"
               >
-                Get Started Now
+                Join the movement
               </motion.button>
               <a
                 href="https://github.com/iamAgbaCoder/pydoctor-cli"
@@ -138,48 +139,7 @@ export default function Home() {
           </motion.div>
         </section>
       </main>
-
-      {/* FOOTER */}
-      <footer className="w-full border-t border-white/5 bg-[#050505] py-20 mt-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="grid md:grid-cols-4 gap-12 mb-16">
-                <div className="col-span-1 md:col-span-2 space-y-6">
-                    <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center text-black font-bold">P</div>
-                        <span className="text-xl font-bold tracking-tighter text-white">PyDoctor</span>
-                    </div>
-                    <p className="text-sm text-white/30 max-w-xs font-mono leading-relaxed">
-                        Precision engineering for the Python ecosystem. Building the next generation of diagnostic and security infrastructure.
-                    </p>
-                </div>
-                <div className="space-y-4">
-                    <h4 className="text-[10px] uppercase tracking-widest font-bold text-white/20">Resources</h4>
-                    <ul className="space-y-3 text-sm text-white/50 font-mono">
-                        <li><Link href="/docs" className="hover:text-orange-500 transition-colors">Documentation</Link></li>
-                        <li><Link href="/api" className="hover:text-orange-500 transition-colors">API Reference</Link></li>
-                        <li><Link href="/changelog" className="hover:text-orange-500 transition-colors">Changelog</Link></li>
-                    </ul>
-                </div>
-                <div className="space-y-4">
-                    <h4 className="text-[10px] uppercase tracking-widest font-bold text-white/20">Community</h4>
-                    <ul className="space-y-3 text-sm text-white/50 font-mono">
-                        <li><a href="#" className="hover:text-orange-500 transition-colors">Twitter</a></li>
-                        <li><a href="#" className="hover:text-orange-500 transition-colors">Discord</a></li>
-                        <li><a href="https://github.com/iamAgbaCoder/pydoctor-cli" className="hover:text-orange-500 transition-colors">GitHub</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-12 border-t border-white/5">
-                <div className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-bold">
-                    &copy; 2026 PYDOCTOR ORCHESTRATOR. ALL SYSTEMS SECURED.
-                </div>
-                <div className="flex space-x-8 text-[10px] uppercase tracking-[0.2em] font-bold text-white/20">
-                    <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-                    <Link href="/legal" className="hover:text-white transition-colors">Legal</Link>
-                </div>
-            </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

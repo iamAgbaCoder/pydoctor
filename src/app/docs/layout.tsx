@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import Link from "next/link";
 import { Search } from "lucide-react";
+import { Footer } from "@/components/footer";
 
 const navigation = [
   {
@@ -39,13 +40,12 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#050505] text-white relative flex flex-col pt-16 font-mono">
-      {/* Re-use navbar or a specialized variants, but Navbar handles stickiness */}
+    <div className="min-h-screen bg-[#050505] text-white relative flex flex-col font-mono">
       <div className="fixed top-0 left-0 right-0 z-50">
         <Navbar />
       </div>
 
-      <div className="flex-1 w-full max-w-screen-2xl mx-auto flex">
+      <div className="flex-1 w-full max-w-screen-2xl mx-auto flex pt-16">
         {/* Left Sidebar */}
         <aside className="fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-full shrink-0 border-r border-white/5 overflow-y-auto md:sticky md:block md:w-64 lg:w-72 bg-[#050505]">
           <div className="pr-4 py-8 pl-8 space-y-8">
@@ -89,6 +89,7 @@ export default function DocsLayout({
           </div>
         </main>
       </div>
+      <Footer />
     </div>
   );
 }
