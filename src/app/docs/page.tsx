@@ -1,18 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Copy, CheckCircle2, Info, ShieldAlert, Zap, Cpu, Search, Layers, ShieldHalf, BarChart3, Settings2, Users2 } from "lucide-react";
-import { useState } from "react";
+import { ShieldAlert, Zap, Cpu } from "lucide-react";
 import { CommandPill } from "@/components/command-pill";
 
 export default function DocsPage() {
-  const [copied, setCopied] = useState<string | null>(null);
-
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(text);
-    setTimeout(() => setCopied(null), 2000);
-  };
 
   const sections = [
     {
