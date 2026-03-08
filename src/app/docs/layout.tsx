@@ -4,7 +4,7 @@ import { Navbar } from "@/components/navbar";
 import Link from "next/link";
 import { Search, Menu, X } from "lucide-react";
 import { Footer } from "@/components/footer";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navigation = [
