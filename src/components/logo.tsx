@@ -1,4 +1,3 @@
-import { Terminal } from "lucide-react";
 
 export const Logo = ({ className = "" }: { className?: string }) => (
   <div className={`flex items-center space-x-3 group ${className}`}>

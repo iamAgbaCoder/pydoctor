@@ -27,7 +27,7 @@ export const TerminalDemo = () => {
           <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
         </div>
         <div className="flex-1 flex justify-center items-center opacity-50 text-[10px] uppercase tracking-widest font-mono text-white/40">
-          Core Diagnostic Interface v1.0.4
+          Core Diagnostic Interface v0.1.0
         </div>
         <button 
           onClick={handleCopy}

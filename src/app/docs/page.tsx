@@ -30,7 +30,7 @@ export default function DocsPage() {
             ))}
           </div>
           <p className="text-white/40 font-mono italic">
-            PyDoctor acts as <span className="text-orange-500 font-bold uppercase tracking-widest text-xs ml-2">"The Doctor for Your Python Environment."</span>
+            PyDoctor acts as <span className="text-orange-500 font-bold uppercase tracking-widest text-xs ml-2">&quot;The Doctor for Your Python Environment.&quot;</span>
           </p>
         </>
       )
@@ -98,7 +98,7 @@ export default function DocsPage() {
                 <div className="p-8 font-mono text-sm space-y-4 text-white/60">
                    <div className="flex gap-4">
                      <span className="text-white/20">$</span>
-                     <span>git clone https://github.com/pydoctor/pydoctor-cli.git</span>
+                     <span>git clone https://github.com/iamAgbaCoder/pydoctor-cli.git</span>
                    </div>
                    <div className="flex gap-4">
                      <span className="text-white/20">$</span>
@@ -116,7 +116,7 @@ export default function DocsPage() {
       content: (
         <div className="space-y-8">
            <p className="text-white/50">Navigate to any Python project node and initiate a full diagnostic kernel scan.</p>
-           <CommandPill command="pydoctor scan" />
+           <CommandPill command="pydoctor diagnose" />
            <div className="bg-orange-500/5 border border-orange-500/20 rounded-2xl p-8 space-y-4">
               <h4 className="text-[10px] uppercase font-bold tracking-widest text-orange-500">Autonomous Report Example</h4>
               <pre className="text-xs font-mono text-white/40 leading-relaxed">
@@ -174,7 +174,7 @@ Diagnosis Complete`}
              <p className="text-sm text-red-100/60 font-mono leading-relaxed mb-6">
                 Critical vulnerabilities are automatically tiered into: <span className="text-red-400 font-bold underline">LOW</span> | <span className="text-red-400 font-bold underline">MEDIUM</span> | <span className="text-red-400 font-bold underline">HIGH</span> | <span className="text-red-400 font-bold underline">CRITICAL</span>.
              </p>
-             <CommandPill command="pydoctor scan-vuln" />
+             <CommandPill command="pydoctor scan-security" />
           </div>
         </div>
       )
