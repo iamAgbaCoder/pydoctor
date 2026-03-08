@@ -46,7 +46,7 @@ export const Footer = () => {
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-12 border-t border-white/5">
           <div className="text-[10px] uppercase tracking-[0.2em] text-white/20 font-bold">
-            &copy; {new Date().getFullYear()} BUILT WITH <span className="text-red-500">❤️</span> BY <Link href="https://iamagbacoder.github.io" className="color: text-orange-500 hover:text-white transition-colors">IAMAGBACODER</Link>. DEPLOYED IN PRODUCTION.
+            &copy; {new Date().getFullYear()} BUILT WITH <span className="text-orange-500">❤️</span> BY <Link href="https://iamagbacoder.github.io" className="color: text-orange-500 hover:text-white transition-colors">IAMAGBACODER</Link>. DEPLOYED IN PRODUCTION.
           </div>
           <div className="flex space-x-8 text-[10px] uppercase tracking-[0.2em] font-bold text-white/20">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

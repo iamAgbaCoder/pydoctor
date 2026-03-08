@@ -6,6 +6,7 @@ import { Github, ArrowRight, ShieldCheck, Zap, Lock, Cpu } from "lucide-react";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
 import { Footer } from "@/components/footer";
+import { Marquee } from "@/components/marquee";
 
 export default function Home() {
   return (
@@ -47,7 +48,7 @@ export default function Home() {
                 </Link>
               </div>
             </motion.div>
-
+ 
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -59,7 +60,7 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-
+ 
         {/* METRICS STACK */}
         <section className="w-full max-w-7xl mx-auto px-6 lg:px-8 pt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -82,6 +83,9 @@ export default function Home() {
                 </motion.div>
             ))}
         </section>
+
+        {/* MARQUEE SECTION */}
+        <Marquee />
 
         {/* FEATURES SECTION */}
         <section className="w-full max-w-7xl mx-auto px-6 lg:px-8 pt-48">

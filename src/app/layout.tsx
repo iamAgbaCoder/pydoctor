@@ -17,8 +17,35 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   title: 'PyDoctor - The Autonomous Diagnostic Engine',
   description: 'Enterprise-grade environment analysis, security auditing, and health orchestration for Python ecosystems.',
+  keywords: ['Python', 'CLI', 'Security', 'Diagnostic', 'Developer Tools', 'Package Manager', 'Vulnerability Scanner'],
+  authors: [{ name: 'iamAgbaCoder' }],
+  openGraph: {
+    title: 'PyDoctor - The Autonomous Diagnostic Engine',
+    description: 'Maintain the health and security of your Python environments with enterprise-grade diagnostic tooling.',
+    url: 'https://pydoctor.vercel.app',
+    siteName: 'PyDoctor',
+    images: [
+      {
+        url: 'https://pydoctor.vercel.app/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'PyDoctor - The Autonomous Diagnostic Engine',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PyDoctor - The Autonomous Diagnostic Engine',
+    description: 'Enterprise-grade environment analysis and security auditing for Python.',
+    images: ['https://pydoctor.vercel.app/og-image.png'],
+    creator: '@iamAgbaCoder',
+  },
   icons: {
     icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
 };
 
