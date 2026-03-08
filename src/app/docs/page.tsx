@@ -180,12 +180,108 @@ Diagnosis Complete`}
       )
     },
     {
+      id: "package-managers",
+      title: "Package Managers",
+      content: (
+        <div className="space-y-10">
+          <p className="text-white/50 leading-relaxed">
+            PyDoctor is engine-agnostic and provides native support for the most popular Python package managers. It automatically detects your project structure and tailors its diagnostic kernel accordingly.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { name: "pip", desc: "The standard", icon: "📦" },
+              { name: "Poetry", desc: "Modern deps", icon: "📜" },
+              { name: "PDM", desc: "Next-gen", icon: "🚀" },
+              { name: "uv", desc: "Extremely fast", icon: "⚡" }
+            ].map((pm) => (
+              <div key={pm.name} className="p-6 glass !rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all group">
+                <div className="text-2xl mb-3 group-hover:scale-110 transition-transform">{pm.icon}</div>
+                <h4 className="text-white font-bold text-sm mb-1">{pm.name}</h4>
+                <p className="text-[10px] text-white/30 uppercase tracking-widest">{pm.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="p-6 bg-white/5 rounded-2xl border border-white/10 font-mono text-xs text-white/40 italic">
+            Note: PyDoctor reads pyproject.toml, setup.py, and requirements.txt dynamically based on the active manager.
+          </div>
+        </div>
+      )
+    },
+    {
+       id: "cli",
+       title: "CLI Commands",
+       content: (
+         <div className="space-y-8">
+            <p className="text-white/50">Master the PyDoctor CLI with these essential diagnostic flags and commands.</p>
+            <div className="space-y-4">
+               {[
+                 { cmd: "pydoctor diagnose", desc: "Initiate full project health scan" },
+                 { cmd: "pydoctor check-env", desc: "Verify Python environment integrity" },
+                 { cmd: "pydoctor scan-security", desc: "Run security vulnerability analysis" },
+                 { cmd: "pydoctor list-deps", desc: "Display deep dependency tree" },
+                 { cmd: "pydoctor clean", desc: "Identify and purge unused packages" }
+               ].map((item) => (
+                 <div key={item.cmd} className="group flex flex-col md:flex-row md:items-center justify-between p-4 glass !rounded-xl border border-white/5 hover:bg-white/10 transition-all gap-4">
+                    <code className="text-orange-500 font-bold">{item.cmd}</code>
+                    <span className="text-[10px] uppercase tracking-widest text-white/30">{item.desc}</span>
+                 </div>
+               ))}
+            </div>
+         </div>
+       )
+    },
+    {
+      id: "deps",
+      title: "Dependency Analysis",
+      content: (
+        <div className="space-y-6">
+           <p className="text-white/50">PyDoctor builds a directed acyclic graph (DAG) of your dependencies to find conflicts and circular references.</p>
+           <CommandPill command="pydoctor list-deps --tree" />
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+              <div className="p-8 glass !rounded-3xl border border-white/5">
+                 <h4 className="text-xs font-bold text-white mb-4 uppercase tracking-[0.2em]">Graph Logic</h4>
+                 <p className="text-sm text-white/40 leading-relaxed italic">The kernel recursively resolves every sub-dependency to ensure version pin compatibility across your entire stack.</p>
+              </div>
+              <div className="p-8 glass !rounded-3xl border border-white/5">
+                 <h4 className="text-xs font-bold text-white mb-4 uppercase tracking-[0.2em]">Pinning Engine</h4>
+                 <p className="text-sm text-white/40 leading-relaxed italic">Automatically suggests optimal version ranges for your requirements.txt or pyproject.toml.</p>
+              </div>
+           </div>
+        </div>
+      )
+    },
+    {
+      id: "outdated",
+      title: "Outdated Packages",
+      content: (
+        <div className="space-y-6">
+           <p className="text-white/50">Stay ahead of the curve. PyDoctor identifies packages with available upstream updates and major version jumps.</p>
+           <CommandPill command="pydoctor check-updates" />
+           <div className="p-6 bg-orange-500/5 border border-orange-500/10 rounded-2xl flex items-center justify-between">
+              <span className="text-sm font-mono text-white/60">Total Outdated Detected</span>
+              <span className="text-2xl font-black text-orange-500">12+</span>
+           </div>
+        </div>
+      )
+    },
+    {
+      id: "unused",
+      title: "Unused Dependencies",
+      content: (
+        <div className="space-y-6">
+           <p className="text-white/50">Bloated environments are slow and insecure. Our heuristics find packages that are installed but never imported in your source code.</p>
+           <CommandPill command="pydoctor find-unused" />
+           <p className="text-[10px] text-white/20 uppercase tracking-widest font-bold">Scanning Heuristics: Static Analysis + Import Tracking</p>
+        </div>
+      )
+    },
+    {
       id: "reports",
       title: "Reporting Engine",
       content: (
         <div className="space-y-6">
            <p className="text-white/50">Generate machine-readable assets for CI/CD pipelines and security audits.</p>
-           <div className="grid sm:grid-cols-3 gap-4">
+           <div className="grid grid-cols-3 gap-4">
              {['JSON', 'Markdown', 'HTML'].map(format => (
                <div key={format} className="p-6 glass text-center font-bold text-[10px] uppercase tracking-widest text-white/40 hover:text-orange-500 hover:border-orange-500/30 transition-all">
                  {format}
@@ -193,6 +289,50 @@ Diagnosis Complete`}
              ))}
            </div>
            <CommandPill command="pydoctor report --format json" />
+        </div>
+      )
+    },
+    {
+      id: "ci",
+      title: "CI/CD Integration",
+      content: (
+        <div className="space-y-8">
+           <p className="text-white/50">Integrate PyDoctor into your GitHub Actions or GitLab CI to fail builds on critical vulnerabilities.</p>
+           <div className="bg-black/60 border border-white/10 rounded-2xl p-8 font-mono text-xs text-white/40 space-y-2">
+              <p className="text-orange-500/50"># .github/workflows/verify.yml</p>
+              <p>- name: PyDoctor Security Scan</p>
+              <p>&nbsp;&nbsp;run: pydoctor scan-security --exit-code</p>
+           </div>
+        </div>
+      )
+    },
+    {
+      id: "config",
+      title: "Configuration",
+      content: (
+        <div className="space-y-6">
+           <p className="text-white/50">PyDoctor can be configured globally using a `.pydoctorrc` or within your `pyproject.toml` file.</p>
+           <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <pre className="text-[10px] font-mono text-white/40">
+{`[tool.pydoctor]
+severity_threshold = "medium"
+exclude_packages = ["pytest", "black"]
+report_format = "json"`}
+              </pre>
+           </div>
+        </div>
+      )
+    },
+    {
+      id: "contributing",
+      title: "Contributing",
+      content: (
+        <div className="space-y-6">
+           <p className="text-white/50">PyDoctor is open-source. We welcome contributions to our diagnostic kernel and security heuristics.</p>
+           <div className="flex gap-4">
+              <a href="https://github.com/iamAgbaCoder/pydoctor-cli" className="px-6 py-3 glass !rounded-full text-[10px] uppercase font-bold tracking-widest text-orange-500 border-orange-500/20 hover:bg-orange-500/10 transition-all">GitHub Repository</a>
+              <a href="#" className="px-6 py-3 glass !rounded-full text-[10px] uppercase font-bold tracking-widest text-white/40 border-white/10">Read Guide</a>
+           </div>
         </div>
       )
     }
