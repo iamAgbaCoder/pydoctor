@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldAlert, Zap, Cpu } from "lucide-react";
+import { ShieldAlert, Zap, Cpu, Activity, FileBox } from "lucide-react";
 import { CommandPill } from "@/components/command-pill";
 
 export default function DocsPage() {
@@ -21,11 +21,14 @@ export default function DocsPage() {
               "security vulnerabilities",
               "unused packages",
               "dependency issues",
-              "environment misconfigurations"
+              "environment misconfigurations",
+              "CI/CD workflow risks",
+              "docker container health",
+              "github repository audits"
             ].map((item, i) => (
-              <div key={i} className="flex items-center space-x-3 p-4 glass !rounded-xl">
-                 <div className="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]"></div>
-                 <span className="text-sm text-white/60 font-mono italic">{item}</span>
+              <div key={i} className="flex items-center space-x-3 p-4 glass !rounded-xl border border-white/5 hover:border-orange-500/30 transition-all hover:bg-white/5 group">
+                 <div className="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)] group-hover:scale-150 transition-transform"></div>
+                 <span className="text-sm text-white/60 font-mono italic group-hover:text-white transition-colors">{item}</span>
               </div>
             ))}
           </div>
@@ -219,11 +222,14 @@ Diagnosis Complete`}
                  { cmd: "pydoctor check-env", desc: "Verify Python environment integrity" },
                  { cmd: "pydoctor scan-security", desc: "Run security vulnerability analysis" },
                  { cmd: "pydoctor list-deps", desc: "Display deep dependency tree" },
-                 { cmd: "pydoctor clean", desc: "Identify and purge unused packages" }
+                 { cmd: "pydoctor clean", desc: "Identify and purge unused packages" },
+                 { cmd: "pydoctor check --ci", desc: "Detect exposed secrets & CI risks" },
+                 { cmd: "pydoctor docker", desc: "Diagnose containers & Dockerfiles" },
+                 { cmd: "pydoctor github", desc: "Audit repository & git configurations" }
                ].map((item) => (
-                 <div key={item.cmd} className="group flex flex-col md:flex-row md:items-center justify-between p-4 glass !rounded-xl border border-white/5 hover:bg-white/10 transition-all gap-4">
-                    <code className="text-orange-500 font-bold">{item.cmd}</code>
-                    <span className="text-[10px] uppercase tracking-widest text-white/30">{item.desc}</span>
+                 <div key={item.cmd} className="group flex flex-col md:flex-row md:items-center justify-between p-4 glass !rounded-xl border border-white/5 hover:bg-white/10 hover:border-orange-500/30 hover:scale-[1.01] transition-all gap-4 shadow-lg cursor-pointer">
+                    <code className="text-orange-500 font-bold group-hover:text-orange-400 transition-colors">{item.cmd}</code>
+                    <span className="text-[10px] uppercase tracking-widest text-white/30 group-hover:text-white/60 transition-colors">{item.desc}</span>
                  </div>
                ))}
             </div>
@@ -246,6 +252,63 @@ Diagnosis Complete`}
                  <h4 className="text-xs font-bold text-white mb-4 uppercase tracking-[0.2em]">Pinning Engine</h4>
                  <p className="text-sm text-white/40 leading-relaxed italic">Automatically suggests optimal version ranges for your requirements.txt or pyproject.toml.</p>
               </div>
+           </div>
+        </div>
+      )
+    },
+    {
+      id: "health-scoring",
+      title: "Advanced Health Scoring",
+      content: (
+        <div className="space-y-12">
+           <p className="text-white/50 leading-relaxed">The v2.0.0 engine introduces a multi-variable scoring algorithm that computes a project health score from 0 to 100.</p>
+           
+           <div className="p-10 glass !rounded-[2.5rem] border border-orange-500/10 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-10 opacity-5">
+                 <Activity className="h-40 w-40 text-orange-500" />
+              </div>
+              
+              <div className="flex flex-col md:flex-row items-center gap-12 relative z-10">
+                 <div className="relative w-32 h-32 flex items-center justify-center">
+                    <svg className="w-full h-full -rotate-90">
+                       <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-white/5" />
+                       <motion.circle 
+                          cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="8" fill="transparent" 
+                          strokeDasharray="364.4"
+                          initial={{ strokeDashoffset: 364.4 }}
+                          whileInView={{ strokeDashoffset: 36.44 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 2, ease: "easeOut" }}
+                          className="text-orange-500" 
+                       />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                       <span className="text-3xl font-black text-white">90</span>
+                       <span className="text-[8px] uppercase font-bold text-white/30 tracking-widest">DR-INDEX</span>
+                    </div>
+                 </div>
+                 
+                 <div className="flex-1 space-y-4">
+                    <h4 className="text-[10px] uppercase font-bold tracking-[0.3em] text-orange-500">PENALTY HEURISTICS</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[10px] font-mono">
+                       <div className="flex items-center gap-2 text-red-400/60"><ShieldAlert className="w-3 h-3" /> Security Flaws: -30pts</div>
+                       <div className="flex items-center gap-2 text-orange-400/60"><Zap className="w-3 h-3" /> Outdated Core: -15pts</div>
+                       <div className="flex items-center gap-2 text-white/40"><Cpu className="w-3 h-3" /> Env drift: -5pts</div>
+                       <div className="flex items-center gap-2 text-white/20"><FileBox className="w-3 h-3" /> CI Warnings: -10pts</div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+
+           <div className="space-y-4">
+              <h4 className="text-white font-bold text-lg mb-2">Dynamic Fix Suggestions</h4>
+              <p className="text-white/40 leading-relaxed font-mono text-sm">
+                 The <code className="text-orange-400">🚀 Next Steps</code> terminal guide intelligently suggests remediation paths based on your current score. It automatically suppresses irrelevant noisy commands and self-optimizes once you achieve the perfect 100/100 health certificate.
+              </p>
+           </div>
+           
+           <div className="p-6 bg-white/5 rounded-2xl border border-white/10 italic text-white/30 text-xs text-center font-mono">
+              Pro Tip: Aim for a score of 95+ to ensure industrial-grade project stability.
            </div>
         </div>
       )
@@ -298,10 +361,11 @@ Diagnosis Complete`}
       content: (
         <div className="space-y-8">
            <p className="text-white/50">Integrate PyDoctor into your GitHub Actions or GitLab CI to fail builds on critical vulnerabilities.</p>
-           <div className="bg-black/60 border border-white/10 rounded-2xl p-8 font-mono text-xs text-white/40 space-y-2">
+           <div className="bg-black/60 border border-white/10 rounded-2xl p-8 font-mono text-xs text-white/40 space-y-2 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/5 to-orange-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
               <p className="text-orange-500/50"># .github/workflows/verify.yml</p>
               <p>- name: PyDoctor Security Scan</p>
-              <p>&nbsp;&nbsp;run: pydoctor scan-security --exit-code</p>
+              <p>&nbsp;&nbsp;run: pydoctor check --ci --exit-code</p>
            </div>
         </div>
       )

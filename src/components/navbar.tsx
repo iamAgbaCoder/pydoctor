@@ -53,6 +53,14 @@ export const Navbar = () => {
               Safety
             </Link>
             <Link
+              href="/releases"
+              className={`text-[11px] uppercase tracking-[0.2em] font-bold transition-colors ${
+                pathname?.startsWith("/releases") ? "text-orange-500" : "text-white/40 hover:text-white"
+              }`}
+            >
+              Releases
+            </Link>
+            <Link
                href="/docs"
                className={`text-[11px] uppercase tracking-[0.2em] font-bold transition-colors ${
                  pathname?.startsWith("/docs") ? "text-orange-500" : "text-white/40 hover:text-white"
@@ -126,6 +134,14 @@ export const Navbar = () => {
                   className="text-2xl font-bold tracking-tighter text-white/40 hover:text-white transition-colors uppercase"
                 >
                   Safety
+                </Link>
+                <Link
+                  href="/releases"
+                  className={`text-2xl font-bold tracking-tighter transition-colors uppercase ${
+                    pathname?.startsWith("/releases") ? "text-orange-500" : "text-white/40 hover:text-white"
+                  }`}
+                >
+                  Releases
                 </Link>
                 <Link
                   href="/docs"

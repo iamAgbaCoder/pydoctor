@@ -16,6 +16,11 @@ const marqueeItems = [
   "HEALTH ORCHESTRATION",
   "PACKAGE ANALYSIS",
   "AUTONOMOUS KERNEL",
+  "CI/CD GUARD",
+  "DOCKER AUDIT",
+  "GITHUB SCAN",
+  "HEALTH SCORING",
+  "OSV FETCHING",
 ];
 
 export const Marquee = () => {

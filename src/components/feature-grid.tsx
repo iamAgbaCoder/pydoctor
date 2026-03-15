@@ -1,43 +1,43 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, ShieldAlert, Boxes, PackageX, FileBox, Activity } from "lucide-react";
+import { Search, ShieldAlert, Container, Github, FileBox, Activity } from "lucide-react";
 
 const features = [
   {
-    title: "Kernel-Level Analysis",
-    description: "Deep-trace the Python runtime environment to identify entropy issues, binary conflicts, and architecture mismatches.",
-    icon: Activity,
+    title: "CI/CD Guard Mode",
+    description: "Detect exposed secrets (AWS, GitHub, PyPI tokens) and insecure workflow patterns in GitHub Actions/GitLab CI.",
+    icon: FileBox,
     color: "text-orange-500"
   },
   {
-    title: "Graph Dependency Audit",
-    description: "Multi-dimensional visualization and mapping of dependency sub-trees, identifying cyclic redundancies and shadow imports.",
-    icon: Boxes,
+    title: "Docker Support",
+    description: "Diagnose Python issues inside containers and audit Dockerfiles seamlessly with the new docker command.",
+    icon: Container,
     color: "text-orange-400"
   },
   {
-    title: "Real-time Registry Sync",
-    description: "Synchronize with global PyPI and proprietary indexes to identify drift in versioning and patch management.",
-    icon: Search,
+    title: "GitHub Integration",
+    description: "Run repository-wide health scans and local git configuration audits powered by native git heuristics.",
+    icon: Github,
     color: "text-orange-300"
   },
   {
-    title: "CWE/CVE Scanning",
-    description: "Automated vulnerability detection leveraging advanced security heuristics to map your codebase against the CVE database.",
+    title: "Smart Env Detection",
+    description: "Automatically limits scans to virtual environments, preventing accidental system-wide changes to your OS.",
     icon: ShieldAlert,
     color: "text-red-500"
   },
   {
-    title: "Dead-Code Elimination",
-    description: "Analyze runtime import hierarchies to detect and isolate unused modules, reducing memory footprint and attack surface.",
-    icon: PackageX,
+    title: "Advanced Health Scoring",
+    description: "Granular 0-100 scoring algorithm with rigorous penalties for security vulnerabilities and CI/CD risks.",
+    icon: Activity,
     color: "text-orange-400"
   },
   {
-    title: "CI/CD Orchestration",
-    description: "Seamlessly integrate with industrial-grade pipelines (GitHub, GitLab, CircleCI) to enforce security gates and quality metrics.",
-    icon: FileBox,
+    title: "OSV Deep-Fetching",
+    description: "Dynamic real-time fetching and caching of full vulnerability advisories to overcome upstream API batch limits.",
+    icon: Search,
     color: "text-orange-200"
   }
 ];
