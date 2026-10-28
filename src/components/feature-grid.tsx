@@ -6,31 +6,31 @@ import { Search, ShieldAlert, Container, Github, FileBox, Activity } from "lucid
 const features = [
   {
     title: "CI/CD Guard Mode",
-    description: "Detect exposed secrets (AWS, GitHub, PyPI tokens) and insecure workflow patterns in GitHub Actions/GitLab CI.",
+    description: "Find committed secrets (cloud, payment and AI API keys, database URLs, .env files) and risky GitHub Actions patterns like pull_request_target pwn requests.",
     icon: FileBox,
     color: "text-orange-500"
   },
   {
-    title: "Docker Support",
-    description: "Diagnose Python issues inside containers and audit Dockerfiles seamlessly with the new docker command.",
+    title: "Docker Check (Preview)",
+    description: "Confirms your Dockerfile exists and uses a Python base image. Image and container inspection are on the roadmap.",
     icon: Container,
     color: "text-orange-400"
   },
   {
     title: "GitHub Integration",
-    description: "Run repository-wide health scans and local git configuration audits powered by native git heuristics.",
+    description: "Run the CI/CD guard on a local checkout, with the repository, branch and remote shown in the report.",
     icon: Github,
     color: "text-orange-300"
   },
   {
     title: "Smart Env Detection",
-    description: "Automatically limits scans to virtual environments, preventing accidental system-wide changes to your OS.",
+    description: "Scans your project's own interpreter wherever PyDoctor is installed, tells you which one, and works in uv environments without pip.",
     icon: ShieldAlert,
     color: "text-red-500"
   },
   {
     title: "Advanced Health Scoring",
-    description: "Granular 0-100 scoring algorithm with rigorous penalties for security vulnerabilities and CI/CD risks.",
+    description: "A 0-100 score where each vulnerable package counts once and every fix moves the needle. Severity comes from real CVSS scores.",
     icon: Activity,
     color: "text-orange-400"
   },
