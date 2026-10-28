@@ -17,14 +17,14 @@ export default function DocsPage() {
           </p>
           <div className="grid sm:grid-cols-2 gap-4 mb-16">
             {[
+              "security vulnerabilities (OSV)",
+              "dependency conflicts",
               "outdated dependencies",
-              "security vulnerabilities",
               "unused packages",
-              "dependency issues",
               "environment misconfigurations",
+              "exposed secrets",
               "CI/CD workflow risks",
-              "docker container health",
-              "github repository audits"
+              "automated fixes"
             ].map((item, i) => (
               <div key={i} className="flex items-center space-x-3 p-4 glass !rounded-xl border border-white/5 hover:border-orange-500/30 transition-all hover:bg-white/5 group">
                  <div className="w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)] group-hover:scale-150 transition-transform"></div>
@@ -32,6 +32,10 @@ export default function DocsPage() {
               </div>
             ))}
           </div>
+          <p className="text-white/50 font-mono mb-8">
+            This page is an overview. The full guide, CLI reference and troubleshooting live at{" "}
+            <a href="https://pydoctor-docs.thally.app" className="text-orange-500 underline underline-offset-4">pydoctor-docs.thally.app</a>.
+          </p>
           <p className="text-white/40 font-mono italic">
             PyDoctor acts as <span className="text-orange-500 font-bold uppercase tracking-widest text-xs ml-2">&quot;The Doctor for Your Python Environment.&quot;</span>
           </p>
@@ -50,10 +54,10 @@ export default function DocsPage() {
               <div className="space-y-4">
                  <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/20">Core Specs</h4>
                  <ul className="space-y-3 font-mono text-sm text-white/40">
-                   <li className="flex justify-between border-b border-white/5 pb-2"><span>Python</span> <span className="text-white">3.9+</span></li>
+                   <li className="flex justify-between border-b border-white/5 pb-2"><span>Python</span> <span className="text-white">3.10+</span></li>
                    <li className="flex justify-between border-b border-white/5 pb-2"><span>OS</span> <span className="text-white">macOS, Linux, Win</span></li>
-                   <li className="flex justify-between border-b border-white/5 pb-2"><span>Environment</span> <span className="text-white">venv / virtualenv</span></li>
-                   <li className="flex justify-between border-b border-white/5 pb-2"><span>Manager</span> <span className="text-white">pip</span></li>
+                   <li className="flex justify-between border-b border-white/5 pb-2"><span>Environment</span> <span className="text-white">venv, virtualenv, uv, Poetry, PDM</span></li>
+                   <li className="flex justify-between border-b border-white/5 pb-2"><span>Network</span> <span className="text-white">api.osv.dev, pypi.org</span></li>
                  </ul>
               </div>
               <div className="space-y-4">
@@ -85,6 +89,12 @@ export default function DocsPage() {
             <h3 className="text-xl font-bold text-white">Recommended: pipx</h3>
             <p className="text-white/50 leading-relaxed">For an isolated global CLI installation, utilizing <span className="text-white font-bold">pipx</span> is the gold standard.</p>
             <CommandPill command="pipx install pydoctor-cli" />
+            <p className="text-white/40 text-sm font-mono">
+              PyDoctor scans your project&apos;s own Python wherever it&apos;s installed: the active virtualenv, or a <code className="text-orange-400">.venv</code>/<code className="text-orange-400">venv</code> in the project. Point it at another interpreter with <code className="text-orange-400">--python</code>.
+            </p>
+            <div className="p-4 rounded-xl border border-orange-500/30 bg-orange-500/5 text-sm text-white/60 font-mono">
+              Install <code className="text-orange-400">pydoctor-cli</code>, not <code className="text-orange-400">pydoctor</code>. The latter is an unrelated project that installs a command with the same name.
+            </div>
           </div>
 
           <div className="space-y-6 pt-8 border-t border-white/5">
@@ -123,22 +133,20 @@ export default function DocsPage() {
            <div className="bg-orange-500/5 border border-orange-500/20 rounded-2xl p-8 space-y-4">
               <h4 className="text-[10px] uppercase font-bold tracking-widest text-orange-500">Autonomous Report Example</h4>
               <pre className="text-xs font-mono text-white/40 leading-relaxed">
-{`PyDoctor Environment Diagnosis
+{`ENVIRONMENT
+  ✔ Python Version:       3.11.9
+  ✔ Interpreter:          .venv/bin/python
+    Found via:            .venv/ in the project
+  ✔ Installed Packages:   124
 
-✔ Python Version: 3.11
-✔ Virtual Environment Active
-✔ Installed Packages: 124
+SECURITY PROTOCOLS
+  ✖ requests 2.31.0 — GHSA-9wx4-h78v-vm56
+       Upgrade to 2.32.0 or later
 
-Dependency Analysis
-⚠ 4 Outdated Packages
+VERSION STATUS
+  ⚠ django 5.1.2 → 5.2.8
 
-Security Scan
-✖ 1 Critical Vulnerability
-
-Unused Dependencies
-⚠ 2 Unused Packages
-
-Diagnosis Complete`}
+❤️  Project Health Score   89 / 100`}
               </pre>
            </div>
         </div>
@@ -155,9 +163,10 @@ Diagnosis Complete`}
               <Cpu className="w-5 h-5 text-orange-500 shrink-0" />
               <div className="text-xs text-white/40 font-mono leading-relaxed space-y-1">
                  <p className="text-white font-bold">CHECKS PERFORMED:</p>
-                 <p>• Python version compatibility</p>
-                 <p>• Active virtual environment status</p>
-                 <p>• Binary PATH validity</p>
+                 <p>• Python version of the project&apos;s interpreter</p>
+                 <p>• Virtual environment status</p>
+                 <p>• pip inside the project environment (uv environments don&apos;t need it)</p>
+                 <p>• Which interpreter was scanned, and how it was found</p>
               </div>
            </div>
         </div>
@@ -175,7 +184,7 @@ Diagnosis Complete`}
              </div>
              <h4 className="text-red-500 font-bold uppercase tracking-[0.2em] text-[10px] mb-4">Urgent: Security Integrity Check</h4>
              <p className="text-sm text-red-100/60 font-mono leading-relaxed mb-6">
-                Critical vulnerabilities are automatically tiered into: <span className="text-red-400 font-bold underline">LOW</span> | <span className="text-red-400 font-bold underline">MEDIUM</span> | <span className="text-red-400 font-bold underline">HIGH</span> | <span className="text-red-400 font-bold underline">CRITICAL</span>.
+                Severity comes from the advisory&apos;s own rating or its CVSS v3 base score: <span className="text-red-400 font-bold underline">LOW</span> → warning, <span className="text-red-400 font-bold underline">MEDIUM</span> → error, <span className="text-red-400 font-bold underline">HIGH</span> and <span className="text-red-400 font-bold underline">CRITICAL</span> → critical. If the database can&apos;t be reached, the scan fails instead of reporting a clean result.
              </p>
              <CommandPill command="pydoctor scan-security" />
           </div>
@@ -205,7 +214,7 @@ Diagnosis Complete`}
             ))}
           </div>
           <div className="p-6 bg-white/5 rounded-2xl border border-white/10 font-mono text-xs text-white/40 italic">
-            Note: PyDoctor reads pyproject.toml, setup.py, and requirements.txt dynamically based on the active manager.
+            Note: PyDoctor reads declared dependencies from pyproject.toml (PEP 621 and Poetry) and requirements.txt, and uses your manager&apos;s own commands when applying fixes.
           </div>
         </div>
       )
@@ -215,17 +224,20 @@ Diagnosis Complete`}
        title: "CLI Commands",
        content: (
          <div className="space-y-8">
-            <p className="text-white/50">Master the PyDoctor CLI with these essential diagnostic flags and commands.</p>
+            <p className="text-white/50">Every scan command accepts <code className="text-orange-400">--path</code>, <code className="text-orange-400">--python</code>, <code className="text-orange-400">--json</code> and <code className="text-orange-400">--verbose</code>.</p>
             <div className="space-y-4">
                {[
-                 { cmd: "pydoctor diagnose", desc: "Initiate full project health scan" },
-                 { cmd: "pydoctor check-env", desc: "Verify Python environment integrity" },
-                 { cmd: "pydoctor scan-security", desc: "Run security vulnerability analysis" },
-                 { cmd: "pydoctor list-deps", desc: "Display deep dependency tree" },
-                 { cmd: "pydoctor clean", desc: "Identify and purge unused packages" },
-                 { cmd: "pydoctor check --ci", desc: "Detect exposed secrets & CI risks" },
-                 { cmd: "pydoctor docker", desc: "Diagnose containers & Dockerfiles" },
-                 { cmd: "pydoctor github", desc: "Audit repository & git configurations" }
+                 { cmd: "pydoctor diagnose", desc: "Full project health scan" },
+                 { cmd: "pydoctor check", desc: "Full scan without prompts (for CI)" },
+                 { cmd: "pydoctor check --ci", desc: "Secrets and workflow risks only" },
+                 { cmd: "pydoctor fix", desc: "Upgrade vulnerable and outdated packages" },
+                 { cmd: "pydoctor scan-security", desc: "Known vulnerabilities (OSV)" },
+                 { cmd: "pydoctor scan-deps", desc: "Dependency conflicts and missing packages" },
+                 { cmd: "pydoctor scan-unused", desc: "Possibly unused dependencies" },
+                 { cmd: "pydoctor check-env", desc: "Python and virtualenv health" },
+                 { cmd: "pydoctor github", desc: "CI guard on a local git checkout" },
+                 { cmd: "pydoctor docker", desc: "Dockerfile check (preview)" },
+                 { cmd: "pydoctor cache clear", desc: "Clear cached advisories" }
                ].map((item) => (
                  <div key={item.cmd} className="group flex flex-col md:flex-row md:items-center justify-between p-4 glass !rounded-xl border border-white/5 hover:bg-white/10 hover:border-orange-500/30 hover:scale-[1.01] transition-all gap-4 shadow-lg cursor-pointer">
                     <code className="text-orange-500 font-bold group-hover:text-orange-400 transition-colors">{item.cmd}</code>
@@ -241,16 +253,16 @@ Diagnosis Complete`}
       title: "Dependency Analysis",
       content: (
         <div className="space-y-6">
-           <p className="text-white/50">PyDoctor builds a directed acyclic graph (DAG) of your dependencies to find conflicts and circular references.</p>
-           <CommandPill command="pydoctor list-deps --tree" />
+           <p className="text-white/50">PyDoctor checks every installed package&apos;s requirements against what is actually installed, the same check as <code className="text-orange-400">pip check</code>, and works without pip in uv environments.</p>
+           <CommandPill command="pydoctor scan-deps" />
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               <div className="p-8 glass !rounded-3xl border border-white/5">
-                 <h4 className="text-xs font-bold text-white mb-4 uppercase tracking-[0.2em]">Graph Logic</h4>
-                 <p className="text-sm text-white/40 leading-relaxed italic">The kernel recursively resolves every sub-dependency to ensure version pin compatibility across your entire stack.</p>
+                 <h4 className="text-xs font-bold text-white mb-4 uppercase tracking-[0.2em]">Conflicts</h4>
+                 <p className="text-sm text-white/40 leading-relaxed italic">A package requires a version range that the installed version doesn&apos;t satisfy, for example <code>urllib3&lt;3</code> with 3.0 installed.</p>
               </div>
               <div className="p-8 glass !rounded-3xl border border-white/5">
-                 <h4 className="text-xs font-bold text-white mb-4 uppercase tracking-[0.2em]">Pinning Engine</h4>
-                 <p className="text-sm text-white/40 leading-relaxed italic">Automatically suggests optimal version ranges for your requirements.txt or pyproject.toml.</p>
+                 <h4 className="text-xs font-bold text-white mb-4 uppercase tracking-[0.2em]">Missing Packages</h4>
+                 <p className="text-sm text-white/40 leading-relaxed italic">A package depends on something that isn&apos;t installed at all. Both block CI with exit code 1.</p>
               </div>
            </div>
         </div>
@@ -261,7 +273,7 @@ Diagnosis Complete`}
       title: "Advanced Health Scoring",
       content: (
         <div className="space-y-12">
-           <p className="text-white/50 leading-relaxed">The v2.0.0 engine introduces a multi-variable scoring algorithm that computes a project health score from 0 to 100.</p>
+           <p className="text-white/50 leading-relaxed">Every scan produces a score from 0 to 100: Excellent (90+), Good (70+), Needs Attention (50+) or Critical. A vulnerable package counts once however many advisories it has, each category can only cost so much, and any critical issue keeps the score below Good.</p>
            
            <div className="p-10 glass !rounded-[2.5rem] border border-orange-500/10 relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-10 opacity-5">
@@ -291,10 +303,10 @@ Diagnosis Complete`}
                  <div className="flex-1 space-y-4">
                     <h4 className="text-[10px] uppercase font-bold tracking-[0.3em] text-orange-500">PENALTY HEURISTICS</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[10px] font-mono">
-                       <div className="flex items-center gap-2 text-red-400/60"><ShieldAlert className="w-3 h-3" /> Security Flaws: -30pts</div>
-                       <div className="flex items-center gap-2 text-orange-400/60"><Zap className="w-3 h-3" /> Outdated Core: -15pts</div>
-                       <div className="flex items-center gap-2 text-white/40"><Cpu className="w-3 h-3" /> Env drift: -5pts</div>
-                       <div className="flex items-center gap-2 text-white/20"><FileBox className="w-3 h-3" /> CI Warnings: -10pts</div>
+                       <div className="flex items-center gap-2 text-red-400/60"><ShieldAlert className="w-3 h-3" /> Security: up to -60pts</div>
+                       <div className="flex items-center gap-2 text-orange-400/60"><FileBox className="w-3 h-3" /> CI/CD &amp; secrets: up to -50pts</div>
+                       <div className="flex items-center gap-2 text-white/40"><Cpu className="w-3 h-3" /> Environment: up to -30pts</div>
+                       <div className="flex items-center gap-2 text-white/20"><Zap className="w-3 h-3" /> Outdated: up to -15pts</div>
                     </div>
                  </div>
               </div>
@@ -308,7 +320,7 @@ Diagnosis Complete`}
            </div>
            
            <div className="p-6 bg-white/5 rounded-2xl border border-white/10 italic text-white/30 text-xs text-center font-mono">
-              Pro Tip: Aim for a score of 95+ to ensure industrial-grade project stability.
+              Set <code>min_health_score</code> in <code>[tool.pydoctor]</code> to fail CI below a threshold.
            </div>
         </div>
       )
@@ -318,12 +330,8 @@ Diagnosis Complete`}
       title: "Outdated Packages",
       content: (
         <div className="space-y-6">
-           <p className="text-white/50">Stay ahead of the curve. PyDoctor identifies packages with available upstream updates and major version jumps.</p>
-           <CommandPill command="pydoctor check-updates" />
-           <div className="p-6 bg-orange-500/5 border border-orange-500/10 rounded-2xl flex items-center justify-between">
-              <span className="text-sm font-mono text-white/60">Total Outdated Detected</span>
-              <span className="text-2xl font-black text-orange-500">12+</span>
-           </div>
+           <p className="text-white/50">Packages with newer releases are listed as part of every full scan; major-version jumps are flagged as warnings. Upgrade them with <code className="text-orange-400">pydoctor fix</code>, which verifies each upgrade actually happened.</p>
+           <CommandPill command="pydoctor diagnose" />
         </div>
       )
     },
@@ -332,9 +340,8 @@ Diagnosis Complete`}
       title: "Unused Dependencies",
       content: (
         <div className="space-y-6">
-           <p className="text-white/50">Bloated environments are slow and insecure. Our heuristics find packages that are installed but never imported in your source code.</p>
-           <CommandPill command="pydoctor find-unused" />
-           <p className="text-[10px] text-white/20 uppercase tracking-widest font-bold">Scanning Heuristics: Static Analysis + Import Tracking</p>
+           <p className="text-white/50">Finds declared dependencies that nothing appears to use. Imports under a different name, Django settings strings, database URLs and Procfile/Dockerfile commands all count as use. Results are &quot;possibly unused&quot;: confirm before removing.</p>
+           <CommandPill command="pydoctor scan-unused" />
         </div>
       )
     },
@@ -343,15 +350,8 @@ Diagnosis Complete`}
       title: "Reporting Engine",
       content: (
         <div className="space-y-6">
-           <p className="text-white/50">Generate machine-readable assets for CI/CD pipelines and security audits.</p>
-           <div className="grid grid-cols-3 gap-4">
-             {['JSON', 'Markdown', 'HTML'].map(format => (
-               <div key={format} className="p-6 glass text-center font-bold text-[10px] uppercase tracking-widest text-white/40 hover:text-orange-500 hover:border-orange-500/30 transition-all">
-                 {format}
-               </div>
-             ))}
-           </div>
-           <CommandPill command="pydoctor report --format json" />
+           <p className="text-white/50">Add <code className="text-orange-400">--json</code> to any scan for machine-readable output, including every issue, a severity summary and the health score.</p>
+           <CommandPill command="pydoctor check --json > pydoctor-report.json" />
         </div>
       )
     },
@@ -360,12 +360,14 @@ Diagnosis Complete`}
       title: "CI/CD Integration",
       content: (
         <div className="space-y-8">
-           <p className="text-white/50">Integrate PyDoctor into your GitHub Actions or GitLab CI to fail builds on critical vulnerabilities.</p>
+           <p className="text-white/50">PyDoctor exits with code 1 when any issue is an error or critical, or when the score falls below <code className="text-orange-400">min_health_score</code>, so it works as a CI gate as-is.</p>
            <div className="bg-black/60 border border-white/10 rounded-2xl p-8 font-mono text-xs text-white/40 space-y-2 relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/5 to-orange-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
               <p className="text-orange-500/50"># .github/workflows/verify.yml</p>
-              <p>- name: PyDoctor Security Scan</p>
-              <p>&nbsp;&nbsp;run: pydoctor check --ci --exit-code</p>
+              <p>- name: Install</p>
+              <p>&nbsp;&nbsp;run: pip install pydoctor-cli &amp;&amp; pip install -r requirements.txt</p>
+              <p>- name: PyDoctor</p>
+              <p>&nbsp;&nbsp;run: pydoctor check --json</p>
            </div>
         </div>
       )
@@ -375,13 +377,14 @@ Diagnosis Complete`}
       title: "Configuration",
       content: (
         <div className="space-y-6">
-           <p className="text-white/50">PyDoctor can be configured globally using a `.pydoctorrc` or within your `pyproject.toml` file.</p>
+           <p className="text-white/50">Configure PyDoctor per project in <code className="text-orange-400">pyproject.toml</code>. Cache, timeout and concurrency are set with <code className="text-orange-400">PYDOCTOR_CACHE_TTL</code>, <code className="text-orange-400">PYDOCTOR_REQUEST_TIMEOUT</code> and <code className="text-orange-400">PYDOCTOR_MAX_WORKERS</code>.</p>
            <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
               <pre className="text-[10px] font-mono text-white/40">
 {`[tool.pydoctor]
-severity_threshold = "medium"
-exclude_packages = ["pytest", "black"]
-report_format = "json"`}
+# Never report these as unused
+ignored_packages = ["celery", "my-plugin"]
+# Exit 1 when the health score drops below this
+min_health_score = 70`}
               </pre>
            </div>
         </div>
@@ -395,7 +398,7 @@ report_format = "json"`}
            <p className="text-white/50">PyDoctor is open-source. We welcome contributions to our diagnostic kernel and security heuristics.</p>
            <div className="flex gap-4">
               <a href="https://github.com/iamAgbaCoder/pydoctor-cli" className="px-6 py-3 glass !rounded-full text-[10px] uppercase font-bold tracking-widest text-orange-500 border-orange-500/20 hover:bg-orange-500/10 transition-all">GitHub Repository</a>
-              <a href="#" className="px-6 py-3 glass !rounded-full text-[10px] uppercase font-bold tracking-widest text-white/40 border-white/10">Read Guide</a>
+              <a href="https://github.com/iamAgbaCoder/pydoctor-cli/blob/main/docs/contributing.md" className="px-6 py-3 glass !rounded-full text-[10px] uppercase font-bold tracking-widest text-white/40 border-white/10">Read Guide</a>
            </div>
         </div>
       )

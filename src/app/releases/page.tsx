@@ -4,10 +4,100 @@ import * as motion from "framer-motion/client";
 
 const releases = [
   {
-    version: "v2.0.0",
+    version: "v2.2.0",
     date: "Latest Release",
-    tagline: "The Security & Architecture Update",
+    tagline: "Results You Can Trust",
     highlight: true,
+    changes: [
+      {
+        title: "Scans the Right Environment",
+        emoji: "🎯",
+        description: "Facts now come from your project's interpreter, not PyDoctor's own. Under pipx or `uv tool`, and in uv environments (which have no pip), 2.1.0 saw 0 packages and reported everything as OK. New `--python` option and `PYDOCTOR_PYTHON`; the report shows which interpreter was scanned and why."
+      },
+      {
+        title: "Fails Loudly",
+        emoji: "🚨",
+        description: "`ENV_PACKAGES_UNAVAILABLE` when the environment can't be read, `ENV_DEPS_NOT_INSTALLED` when the scanned Python has none of your dependencies, and checks that couldn't run say so instead of reporting a clean result."
+      },
+      {
+        title: "Real CVSS Severity",
+        emoji: "📏",
+        description: "Severity is computed from the CVSS v3 vector. Previously a 3.1 (Low) and a 9.8 (Critical) vulnerability were both shown as critical. GitHub's `MODERATE` now maps to medium."
+      },
+      {
+        title: "Right Fix Version",
+        emoji: "🔧",
+        description: "For advisories with one fix per release line, `pydoctor fix` targets yours (Django 5.1.2 upgrades to 5.1.4, not 4.2.17)."
+      },
+      {
+        title: "CI Guard Finds Real Leaks",
+        emoji: "🛡️",
+        description: "Scans every committed text file for Stripe, OpenAI, Anthropic, Slack, Google, AWS, GitHub and PyPI keys, private keys, database URLs and `SECRET_KEY` settings; flags committed `.env` files; checks workflows for `pull_request_target` pwn requests, script injection and `write-all`. Zero findings on Flask, Django, requests, httpx, FastAPI, DRF and pip."
+      },
+      {
+        title: "A Score That Moves",
+        emoji: "📈",
+        description: "A package's advisories count once, categories have diminishing returns, and any critical issue keeps the score below Good, so fixing things visibly improves it."
+      },
+      {
+        title: "Better JSON",
+        emoji: "🧾",
+        description: "`--json` output includes the health score; `scan-security --json` reports advisory IDs, aliases, fixed version and CVSS score."
+      },
+      {
+        title: "Virtualenv Detection Fixed",
+        emoji: "🔍",
+        description: "The no-venv check could never trigger before. It now works, and never blocks CI or piped runs with a prompt."
+      }
+    ]
+  },
+  {
+    version: "v2.1.0",
+    date: "Previous Release",
+    tagline: "Honest Fixes",
+    changes: [
+      {
+        title: "Verified Upgrades",
+        emoji: "✅",
+        description: "`pydoctor fix` checks the installed version after each upgrade. If a pin in `pyproject.toml` blocks it, you see the constraint instead of a false \"fixed\"."
+      },
+      {
+        title: "One Prompt per Package",
+        emoji: "🧮",
+        description: "Vulnerable packages are offered once, with the advisory count, instead of once per advisory."
+      },
+      {
+        title: "No Accidental Removals",
+        emoji: "🛑",
+        description: "`pydoctor fix <package>` no longer offers to uninstall it. Removal only runs with `--remove`."
+      },
+      {
+        title: "Fewer False Unused Reports",
+        emoji: "🧹",
+        description: "Packages imported under a different name, loaded from Django settings strings, or started from a Procfile or Dockerfile are recognised as used."
+      }
+    ]
+  },
+  {
+    version: "v2.0.1",
+    date: "Patch",
+    changes: [
+      {
+        title: "Security Scans Fail Closed",
+        emoji: "🔒",
+        description: "If the OSV database can't be reached, PyDoctor reports `SEC_SCAN_INCOMPLETE` and exits 1 instead of a clean result."
+      },
+      {
+        title: "No Double-Counted Advisories",
+        emoji: "🔗",
+        description: "Advisories listed under several IDs (GHSA and PYSEC) are reported and scored once."
+      }
+    ]
+  },
+  {
+    version: "v2.0.0",
+    date: "Major Release",
+    tagline: "The Security & Architecture Update",
     changes: [
       {
         title: "Major UI/UX Revamp",

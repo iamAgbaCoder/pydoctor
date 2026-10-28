@@ -8,7 +8,7 @@ export const TerminalDemo = () => {
   const [copied, setCopied] = useState(false);
   
   const handleCopy = () => {
-    navigator.clipboard.writeText("pydoctor --autonomous-scan");
+    navigator.clipboard.writeText("pydoctor diagnose");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -27,7 +27,7 @@ export const TerminalDemo = () => {
           <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
         </div>
         <div className="flex-1 flex justify-center items-center opacity-50 text-[10px] uppercase tracking-widest font-mono text-white/40">
-          Core Diagnostic Interface v2.0.0
+          Core Diagnostic Interface v2.2.0
         </div>
         <button 
           onClick={handleCopy}
@@ -40,7 +40,7 @@ export const TerminalDemo = () => {
       <div className="p-6 font-mono text-[13px] md:text-sm leading-relaxed overflow-x-auto text-neutral-300 bg-[#050505]/80">
         <div className="flex items-center text-orange-500 mb-6">
           <span className="text-white/40 mr-3">admin@pydoctor:~$</span> 
-          <TypingText text="pyydoctor diagnose --verbose" delay={0.2} speed={40} />
+          <TypingText text="pydoctor diagnose --verbose" delay={0.2} speed={40} />
         </div>
         
         <FadeIn delay={1.4}>
@@ -49,10 +49,10 @@ export const TerminalDemo = () => {
              Initializing Kernel Analysis...
           </div>
           <div className="flex items-center text-emerald-400/80 mb-1">
-            <span className="mr-3 opacity-50">STDOUT:</span> [SUCCESS] Runtime: Python 3.12.2 (Enterprise Build)
+            <span className="mr-3 opacity-50">STDOUT:</span> [SUCCESS] Runtime: Python 3.12.2 (Darwin)
           </div>
           <div className="flex items-center text-emerald-400/80 mb-5">
-            <span className="mr-3 opacity-50">STDOUT:</span> [SUCCESS] Entropy Check: PASS
+            <span className="mr-3 opacity-50">STDOUT:</span> [SUCCESS] Interpreter: .venv/bin/python
           </div>
         </FadeIn>
 
@@ -62,19 +62,19 @@ export const TerminalDemo = () => {
 
         <FadeIn delay={3.2}>
           <div className="flex items-center text-orange-400 mb-1">
-            <span className="mr-3 opacity-50">WARN:</span> 12 Packages Deprecated
+            <span className="mr-3 opacity-50">WARN:</span> 12 packages outdated
           </div>
           <div className="flex items-center text-red-500 mb-1">
-            <span className="mr-3 opacity-50">CRIT:</span> CWE-119 identified in &apos;cryptography&apos;
+            <span className="mr-3 opacity-50">CRIT:</span> cryptography 43.0.3 — GHSA-79v4-65xg-pq4g
           </div>
           <div className="flex items-center text-emerald-400/80 mb-5">
-            <span className="mr-3 opacity-50">INFO:</span> Shadow dependencies isolated
+            <span className="mr-3 opacity-50">INFO:</span> 4 transitive dependencies separated from unused
           </div>
         </FadeIn>
 
         <FadeIn delay={4.0}>
           <div className="text-orange-500 font-bold border border-orange-500/30 px-4 py-2 bg-orange-500/5 inline-block">
-                  SECURITY PROTOCOL: ACTION REQUIRED. Generate report? (y/n)_
+                  SECURITY PROTOCOL: ACTION REQUIRED. Run `pydoctor fix`_
           </div>
         </FadeIn>
       </div>
