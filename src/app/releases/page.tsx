@@ -4,10 +4,42 @@ import * as motion from "framer-motion/client";
 
 const releases = [
   {
-    version: "v2.2.0",
+    version: "v2.3.0",
     date: "Latest Release",
-    tagline: "Results You Can Trust",
+    tagline: "Built for CI",
     highlight: true,
+    changes: [
+      {
+        title: "Baselines",
+        emoji: "📌",
+        description: "`pydoctor baseline` records today's issues in `.pydoctor-baseline.json`; scans then fail only on new ones and tell you when a baselined issue is fixed. Adopt PyDoctor in an existing project without a wall of failures. Matching survives unrelated edits and package upgrades, and scans that didn't run are never baselined."
+      },
+      {
+        title: "SARIF Output",
+        emoji: "🧾",
+        description: "`--sarif FILE` on every scan command writes SARIF 2.1.0 for GitHub code scanning and other tools. Vulnerabilities carry their CVSS score as severity and point at the line that declares the package; secrets and workflow findings point at their file and line."
+      },
+      {
+        title: "GitHub Action",
+        emoji: "🐙",
+        description: "`uses: iamAgbaCoder/pydoctor-cli@v2` installs PyDoctor in isolation, shows findings as code-scanning alerts on pull requests, and fails the job on new problems."
+      },
+      {
+        title: "pre-commit Hooks",
+        emoji: "🪝",
+        description: "`pydoctor-ci` blocks commits that add secrets, `.env` files or risky workflows. `pydoctor-check` runs the full scan before you push."
+      },
+      {
+        title: "Docs Links",
+        emoji: "📖",
+        description: "Every issue links to the page in the documentation that explains it: `docs_url` in JSON, and a Docs line in the terminal for errors."
+      }
+    ]
+  },
+  {
+    version: "v2.2.0",
+    date: "Previous Release",
+    tagline: "Results You Can Trust",
     changes: [
       {
         title: "Scans the Right Environment",
@@ -53,7 +85,7 @@ const releases = [
   },
   {
     version: "v2.1.0",
-    date: "Previous Release",
+    date: "Minor Release",
     tagline: "Honest Fixes",
     changes: [
       {

@@ -25,7 +25,7 @@ export default function Home() {
             >
               <div className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-[10px] uppercase tracking-[0.2em] font-bold text-orange-400">
                 <span className="flex h-1.5 w-1.5 rounded-full bg-orange-500 mr-2 dot-blink"></span>
-                System Status: Operational (v2.2.0)
+                System Status: Operational (v2.3.0)
               </div>
               
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-white leading-[0.9] text-center max-w-5xl">
@@ -68,7 +68,7 @@ export default function Home() {
                 { label: "Scanners", value: "6", icon: Zap },
                 { label: "Advisory Source", value: "OSV.dev", icon: Lock },
                 { label: "Package Managers", value: "4", icon: ShieldCheck },
-                { label: "Kernel Version", value: "v2.2.0", icon: Cpu },
+                { label: "Kernel Version", value: "v2.3.0", icon: Cpu },
             ].map((stat, i) => (
                 <motion.div 
                     key={i}
